@@ -1087,11 +1087,19 @@ the key within the combining strategy.
 
 ##### 4.2.4.3. Combining a PCollection into a single value {#combining-pcollection}
 
+<span class="language-java">
 Use the global combine to transform all of the elements in a given `PCollection`
 into a single value, represented in your pipeline as a new `PCollection`
 containing one element. The following example code shows how to apply the Beam
 provided sum combine function to produce a single sum value for a `PCollection`
 of integers.
+</span>
+<span class="language-py">
+Use the global combine to transform all of the elements in a given `PCollection`
+into a single value, represented in your pipeline as a new `PCollection`
+containing one element. The following example code shows how to apply a custom
+`CombineFn` to compute the mean average of a `PCollection`.
+</span>
 
 ```java
 // Sum.SumIntegerFn() combines the elements in the input PCollection. The resulting PCollection, called sum,
@@ -1101,8 +1109,8 @@ PCollection<Integer> sum = pc.apply(
    Combine.globally(new Sum.SumIntegerFn()));
 ```
 ```py
-# sum combines the elements in the input PCollection.
-# The resulting PCollection, called result, contains one value: the sum of all
+# AverageFn combines the elements in the input PCollection.
+# The resulting PCollection, called result, contains one value: the mean average of all
 # the elements in the input PCollection.
 pc = ...
 {% github_sample /apache/beam/blob/master/sdks/python/apache_beam/examples/snippets/snippets_test.py tag:combine_custom_average_execute
